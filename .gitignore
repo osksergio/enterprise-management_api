@@ -32,3 +32,6 @@
 
 # Ignore ide files
 .idea
+
+# Ignore configs / vars
+.env
