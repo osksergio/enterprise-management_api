@@ -1,4 +1,4 @@
-class CreateCompany
+class Company::Create
   attr_accessor :description, :email, :password
 
   include Callable
@@ -10,10 +10,15 @@ class CreateCompany
   end
 
   def call
-    create if valid?
+    build
+    persist if valid?
   end
 
   private
+
+  def build
+    @company = Company.new(description: @description, email: @email, password: @password)
+  end
 
   def valid?
     existing_email = Company.find_by email: @email
@@ -26,7 +31,7 @@ class CreateCompany
     end
   end
 
-  def create
-    Company.create(description: @description, email: @email, password: @password)
+  def persist
+    @company.save
   end
 end
