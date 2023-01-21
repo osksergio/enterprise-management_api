@@ -15,12 +15,12 @@ class CompaniesController < ApplicationController
 
   # POST /companies
   def create
-    @company = Company.new(company_params)
+    service = Company::Create.call(company_params)
 
-    if @company.save
-      render json: @company, status: :created, location: @company
+    if service
+      render json: { message: 'Company created successfully!' }, status: :created
     else
-      render json: @company.errors, status: :unprocessable_entity
+      render json: { message: 'There was an error registering the company! :(' }, status: :unprocessable_entity
     end
   end
 
