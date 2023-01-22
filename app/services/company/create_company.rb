@@ -1,12 +1,9 @@
+#class Company::Create
 class Company::Create
-  attr_accessor :description, :email, :password
-
   include Callable
 
-  def initialize(description, email, password)
-    @description = description
-    @email       = email
-    @password    = password
+  def initialize(company_params)
+    @company_params = company_params
   end
 
   def call
@@ -17,7 +14,7 @@ class Company::Create
   private
 
   def build
-    @company = Company.new(description: @description, email: @email, password: @password)
+    @company = Company.new(@company_params)
   end
 
   def valid?
