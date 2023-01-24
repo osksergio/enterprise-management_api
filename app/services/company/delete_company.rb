@@ -1,4 +1,4 @@
-class DeleteCompany
+class Company::Delete
   include Callable
 
   def initialize(company_id)
@@ -12,13 +12,11 @@ class DeleteCompany
   private
 
   def valid?
-    if @company.nil?
-      errors.add(:base, 'Company not found')
-      return false
-    else
-      return true
-    end
-  end
+    return true if @company.present?
+    errors.add(:base, 'Company not found')
+    false
+  end    
+
 
   def destroy
     @company.destroy
