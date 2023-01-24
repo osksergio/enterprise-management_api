@@ -18,14 +18,7 @@ class Company::Create
   end
 
   def valid?
-    existing_email = Company.find_by email: @email
-    if existing_email.present?
-      errors.add(:email, "has already been taken")
-      return false
-      raise StandardError, 'Company already exists'
-    else
-      return true
-    end
+    @company.valid?
   end
 
   def persist
