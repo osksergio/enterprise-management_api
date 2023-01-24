@@ -1,4 +1,3 @@
-#class Company::Create
 class Company::Create
   include Callable
 
