@@ -17,7 +17,7 @@ class CompaniesController < ApplicationController
   def create
     service = Company::Create.call(company_params)
 
-    if service.success?
+    if service
       render json: { message: 'Company created successfully!' }, status: :created
     else
       render json: { message: 'There was an error registering the company! :(' }, status: :unprocessable_entity
