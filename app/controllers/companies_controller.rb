@@ -36,8 +36,9 @@ class CompaniesController < ApplicationController
   # DELETE /companies/1
   def destroy
     id_deleted = params[:id]
-
-    if @company.destroy
+    service = Company::Delete.call(id_deleted)
+    
+    if service
       render json: { message: "Company was successfully destroyed (id: #{id_deleted}).", status: :ok }
     else
       render json: @company.errors, status: :unprocessable_entity
