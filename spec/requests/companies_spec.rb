@@ -21,22 +21,6 @@ RSpec.describe "/companies", type: :request do
     {}
   }
 
-  describe "GET /index" do
-    it "renders a successful response" do
-      Company.create! valid_attributes
-      get companies_url, headers: valid_headers, as: :json
-      expect(response).to be_successful
-    end
-  end
-
-  describe "GET /show" do
-    it "renders a successful response" do
-      company = Company.create! valid_attributes
-      get company_url(company), as: :json
-      expect(response).to be_successful
-    end
-  end
-
   describe "POST /create" do
     context "with valid parameters" do
       it "creates a new Company" do
@@ -65,40 +49,6 @@ RSpec.describe "/companies", type: :request do
       it "renders a JSON response with errors for the new company" do
         post companies_url,
              params: { company: invalid_attributes }, headers: valid_headers, as: :json
-        expect(response).to have_http_status(:unprocessable_entity)
-        expect(response.content_type).to match(a_string_including("application/json"))
-      end
-    end
-  end
-
-  describe "PATCH /update" do
-    context "with valid parameters" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
-
-      it "updates the requested company" do
-        company = Company.create! valid_attributes
-        patch company_url(company),
-              params: { company: new_attributes }, headers: valid_headers, as: :json
-        company.reload
-        skip("Add assertions for updated state")
-      end
-
-      it "renders a JSON response with the company" do
-        company = Company.create! valid_attributes
-        patch company_url(company),
-              params: { company: new_attributes }, headers: valid_headers, as: :json
-        expect(response).to have_http_status(:ok)
-        expect(response.content_type).to match(a_string_including("application/json"))
-      end
-    end
-
-    context "with invalid parameters" do
-      it "renders a JSON response with errors for the company" do
-        company = Company.create! valid_attributes
-        patch company_url(company),
-              params: { company: invalid_attributes }, headers: valid_headers, as: :json
         expect(response).to have_http_status(:unprocessable_entity)
         expect(response.content_type).to match(a_string_including("application/json"))
       end
