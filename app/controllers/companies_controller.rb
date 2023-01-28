@@ -1,6 +1,9 @@
 class CompaniesController < ApplicationController
   before_action :set_company, only: [:show, :update, :destroy]
 
+  require_relative '../services/company/create_company'
+  require_relative '../services/company/delete_company'
+
   # GET /companies
   def index
     @companies = Company.all
