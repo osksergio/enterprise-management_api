@@ -1,4 +1,4 @@
-class Company::Create
+class Company::CreateCompany
   include Callable
 
   def initialize(company_params)

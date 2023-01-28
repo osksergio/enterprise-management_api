@@ -1,9 +1,6 @@
 class CompaniesController < ApplicationController
   before_action :set_company, only: [:show, :update, :destroy]
 
-  require_relative '../services/company/create_company'
-  require_relative '../services/company/delete_company'
-
   # GET /companies
   def index
     @companies = Company.all
@@ -18,7 +15,7 @@ class CompaniesController < ApplicationController
 
   # POST /companies
   def create
-    service = Company::Create.call(company_params)
+    service = Company::CreateCompany.call(company_params)
 
     if service
       render json: { message: 'Company created successfully!' }, status: :created
@@ -39,7 +36,7 @@ class CompaniesController < ApplicationController
   # DELETE /companies/1
   def destroy
     id_deleted = params[:id]
-    service = Company::Delete.call(id_deleted)
+    service = Company::DeleteCompany.call(id_deleted)
     
     if service
       render json: { message: "Company was successfully destroyed (id: #{id_deleted}).", status: :ok }

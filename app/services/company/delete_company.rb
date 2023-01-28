@@ -1,4 +1,4 @@
-class Company::Delete
+class Company::DeleteCompany
   include Callable
 
   def initialize(company_id)
