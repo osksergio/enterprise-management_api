@@ -26,7 +26,7 @@ class CompaniesController < ApplicationController
 
   # PATCH/PUT /companies/1
   def update
-    service = Company::UpdateCompany.call(company_params)
+    service = Company::UpdateCompany.call(params[:id])
 
     if service
       render json: { message: 'Company updated successfully!' }, status: :ok

@@ -1,28 +1,27 @@
 class Company::UpdateCompany
   include Callable
 
-  def initialize(company_params)
-    @company_params = company_params
+  def initialize(id)
+    @id = id
   end
 
   def call
     build
+    persist if valid?
   end
 
   private
 
   def build
-    @company = Company.update(@company_params)
+    @company = Company.find(@id)
+    @company.assign_attributes(description: @company.description, email: @company.email, password: @company.password)
   end
 
-  # NÃO ESQUECER DE VERIFICAR: COMO VALIDAR E PERSISTIR NO DATABASE
-  # UPDATE
+  def valid?
+    @company.valid?
+  end
 
-  #def valid?
-  #  @company.valid?
-  #end
-
-  #def persist
-  #  @company.save
-  #end
+  def persist
+    @company.save
+  end
 end
