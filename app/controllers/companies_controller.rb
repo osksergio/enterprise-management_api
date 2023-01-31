@@ -26,8 +26,10 @@ class CompaniesController < ApplicationController
 
   # PATCH/PUT /companies/1
   def update
-    if @company.update(company_params)
-      render json: @company
+    service = Company::UpdateCompany.call(company_params)
+
+    if service
+      render json: { message: 'Company updated successfully!' }, status: :ok
     else
       render json: @company.errors, status: :unprocessable_entity
     end
