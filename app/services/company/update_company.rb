@@ -1,8 +1,11 @@
 class Company::UpdateCompany
   include Callable
 
-  def initialize(id)
-    @id = id
+  def initialize(id, description, email, password)
+    @id = params[:id]
+    @description = params[:description]
+    @email = params[:email]
+    @password = params[:password]
   end
 
   def call
@@ -14,7 +17,7 @@ class Company::UpdateCompany
 
   def build
     @company = Company.find(@id)
-    @company.assign_attributes(description: @company.description, email: @company.email, password: @company.password)
+    @company.assign_attributes(description: @description, email: @email, password: @password)
   end
 
   def valid?
