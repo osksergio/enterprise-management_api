@@ -1,6 +1,10 @@
 class Company::IndexCompany
   include Callable
 
+  def initialize
+    @companies = Company.all
+  end
+  
   def call
     index
   end
@@ -8,6 +12,6 @@ class Company::IndexCompany
   private
 
   def index
-    @companies = Company.all
+    @companies
   end
 end
