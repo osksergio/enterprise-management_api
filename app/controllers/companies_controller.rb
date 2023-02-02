@@ -3,14 +3,14 @@ class CompaniesController < ApplicationController
 
   # GET /companies
   def index
-    @companies = Company.all
-
-    render json: @companies
+    service = Company::IndexCompany.call
+    render json: @companies if service
   end
 
   # GET /companies/1
   def show
-    render json: @company
+    service = Company::ShowCompany.call(params[:id])
+    render json: @company if service
   end
 
   # POST /companies
