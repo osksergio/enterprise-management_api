@@ -1,7 +1,7 @@
 class Company::UpdateCompany
   include Callable
 
-  def initialize(id, description, email, password)
+  def initialize(params)
     @id = params[:id]
     @description = params[:description]
     @email = params[:email]
