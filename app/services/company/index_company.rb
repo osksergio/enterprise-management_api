@@ -1,10 +1,9 @@
+# frozen_string_literal: true
+
+# class: get companies
 class Company::IndexCompany
   include Callable
 
-  def initialize
-    @companies = Company.all
-  end
-  
   def call
     index
   end
@@ -12,6 +11,6 @@ class Company::IndexCompany
   private
 
   def index
-    @companies
+    @companies = Company.all
   end
 end

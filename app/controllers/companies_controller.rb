@@ -4,7 +4,7 @@ class CompaniesController < ApplicationController
   # GET /companies
   def index
     service = Company::IndexCompany.call
-    render json: @companies if service
+    render json: service
   end
 
   # GET /companies/1
