@@ -11,6 +11,7 @@ gem 'dotenv-rails'
 gem 'net-smtp', '~> 0.3.1'
 gem "cpf_cnpj"
 gem 'prawn-rails'
+gem 'rubocop'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
