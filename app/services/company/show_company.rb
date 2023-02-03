@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# service object for show campany
 class Company::ShowCompany
   include Callable
 
@@ -13,6 +16,7 @@ class Company::ShowCompany
 
   def valid?
     return true if @company.present?
+
     errors.add(:base, 'Company not found')
     false
   end
