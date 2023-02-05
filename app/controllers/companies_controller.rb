@@ -39,7 +39,7 @@ class CompaniesController < ApplicationController
   def destroy
     id_deleted = params[:id]
     service = Company::DeleteCompany.call(id_deleted)
-    
+
     if service
       render json: { message: "Company was successfully destroyed (id: #{id_deleted}).", status: :ok }
     else
@@ -48,13 +48,14 @@ class CompaniesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_company
-      @company = Company.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def company_params
-      params.require(:company).permit(:description, :email, :password)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_company
+    @company = Company.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def company_params
+    params.require(:company).permit(:description, :email, :password)
+  end
 end
