@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Company::DeleteCompany
   include Callable
 
@@ -13,10 +15,10 @@ class Company::DeleteCompany
 
   def valid?
     return true if @company.present?
+
     errors.add(:base, 'Company not found')
     false
-  end    
-
+  end
 
   def destroy
     @company.destroy
