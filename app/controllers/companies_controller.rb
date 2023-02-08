@@ -10,7 +10,7 @@ class CompaniesController < ApplicationController
   # GET /companies/1
   def show
     service = Company::ShowCompany.call(params[:id])
-    render json: @company if service
+    render json: service if service
   end
 
   # POST /companies
