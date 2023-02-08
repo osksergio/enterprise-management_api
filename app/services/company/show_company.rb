@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
-class Company::DeleteCompany
+# service object for show campany
+class Company::ShowCompany
   include Callable
 
   def initialize(company_id)
@@ -8,7 +9,7 @@ class Company::DeleteCompany
   end
 
   def call
-    destroy if valid?
+    show if valid?
   end
 
   private
@@ -20,7 +21,7 @@ class Company::DeleteCompany
     false
   end
 
-  def destroy
-    @company.destroy
+  def show
+    @company
   end
 end
