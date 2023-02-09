@@ -29,5 +29,11 @@
 # To learn more, please read the Rails Internationalization guide
 # available at https://guides.rubyonrails.org/i18n.html.
 
-en:
-  hello: "Hello world"
+pt:
+  company:
+    create_company:
+      taken: 'Um certo campo do cadastro deve ser único'
+    update_company:
+      blank: 'Não pode ser nulo'
+    delete_company:
+      not_found: 'Registro não encontrado'
