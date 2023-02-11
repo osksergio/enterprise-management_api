@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# controller Companies: multi-tenant pattern
 class CompaniesController < ApplicationController
   before_action :set_company, only: [:show, :update]
 
