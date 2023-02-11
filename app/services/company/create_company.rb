@@ -5,6 +5,8 @@ class Company::CreateCompany
     @company_params = company_params
   end
 
+  attr_reader :company
+
   def call
     build
     persist if valid?
@@ -17,7 +19,10 @@ class Company::CreateCompany
   end
 
   def valid?
-    @company.valid?
+    return true if @company.valid?
+
+    add_error(@company)
+    false
   end
 
   def persist

@@ -8,9 +8,17 @@ class Company::UpdateCompany
     @password = params[:password]
   end
 
+  attr_reader :company
+  attr_reader :test
+
   def call
+    test
     build
     persist if valid?
+  end
+
+  def test
+    @test = 'Testando o attr_reader'
   end
 
   private
@@ -21,7 +29,10 @@ class Company::UpdateCompany
   end
 
   def valid?
-    @company.valid?
+    return true if @company.valid?
+
+    add_error(@company)
+    false
   end
 
   def persist

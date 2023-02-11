@@ -4,7 +4,7 @@ class Company::DeleteCompany
   include Callable
 
   def initialize(company_id)
-    @company = Company.find(company_id)
+    @company = Company.find(company_id) rescue nil
   end
 
   def call
@@ -16,7 +16,7 @@ class Company::DeleteCompany
   def valid?
     return true if @company.present?
 
-    errors.add(:base, 'Company not found')
+    add_error(nil, 'company', 'not_found')
     false
   end
 

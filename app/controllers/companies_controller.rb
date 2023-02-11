@@ -1,5 +1,5 @@
 class CompaniesController < ApplicationController
-  before_action :set_company, only: [:show, :update, :destroy]
+  before_action :set_company, only: [:show, :update]
 
   # GET /companies
   def index
@@ -17,10 +17,10 @@ class CompaniesController < ApplicationController
   def create
     service = Company::CreateCompany.call(company_params)
 
-    if service
-      render json: { message: 'Company created successfully!' }, status: :created
+    if service.success?
+      render json: service.company, status: :created
     else
-      render json: { message: 'There was an error registering the company! :(' }, status: :unprocessable_entity
+      render json: { errors: service.errors }, status: :unprocessable_entity
     end
   end
 
@@ -28,10 +28,10 @@ class CompaniesController < ApplicationController
   def update
     service = Company::UpdateCompany.call(params)
 
-    if service
-      render json: { message: 'Company updated successfully!' }, status: :ok
+    if service.success?
+      render json: service.company, status: :ok
     else
-      render json: @company.errors, status: :unprocessable_entity
+      render json: { errors: service.errors, test: service.test }, status: :unprocessable_entity
     end
   end
 
@@ -40,10 +40,10 @@ class CompaniesController < ApplicationController
     id_deleted = params[:id]
     service = Company::DeleteCompany.call(id_deleted)
 
-    if service
+    if service.success?
       render json: { message: "Company was successfully destroyed (id: #{id_deleted}).", status: :ok }
     else
-      render json: @company.errors, status: :unprocessable_entity
+      render json: { errors: service.errors }, status: :unprocessable_entity
     end
   end
 
