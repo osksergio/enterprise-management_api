@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# call to the services
 module Callable
   extend ActiveSupport::Concern
   class_methods do
@@ -17,7 +20,7 @@ module Callable
   end
 
   def t(key)
-    I18n.t(key, scope: self.class.name.underscore.split("/"))
+    I18n.t(key, scope: self.class.name.underscore.split('/'))
   end
 
   def add_error(object, attribute = nil, type = nil)
