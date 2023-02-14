@@ -1,5 +1,5 @@
 class CitiesController < ApplicationController
-  before_action :set_city, only: [:show, :update, :destroy]
+  before_action :set_city, only: %i[show update destroy]
 
   # GET /cities
   def index
@@ -15,12 +15,12 @@ class CitiesController < ApplicationController
 
   # POST /cities
   def create
-    @city = City.new(city_params)
+    service = City::CreateCity.call(city_params)
 
-    if @city.save
-      render json: @city, status: :created, location: @city
+    if service.success?
+      render json: service.city, status: :created
     else
-      render json: @city.errors, status: :unprocessable_entity
+      render json: { errors: service.errors }, status: :unprocessable_entity
     end
   end
 
