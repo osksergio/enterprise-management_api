@@ -3,9 +3,8 @@ class CitiesController < ApplicationController
 
   # GET /cities
   def index
-    @cities = City.all
-
-    render json: @cities
+    service = Company::IndexCompany.call
+    render json: service
   end
 
   # GET /cities/1
