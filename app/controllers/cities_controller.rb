@@ -1,5 +1,5 @@
 class CitiesController < ApplicationController
-  before_action :set_city, only: %i[show update destroy]
+  before_action :set_city, only: %i[show update]
 
   # GET /cities
   def index
@@ -35,17 +35,25 @@ class CitiesController < ApplicationController
 
   # DELETE /cities/1
   def destroy
-    @city.destroy
+    id_deleted = params[:id]
+    service = City::DeleteCity.call(id_deleted)
+
+    if service.success?
+      render json: { message: "City was successfully destroyed (id: #{id_deleted}.", status: :ok }
+    else
+      render json: { errors: service.errors }, status: :unprocessable_entity
+    end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_city
-      @city = City.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def city_params
-      params.require(:city).permit(:description, :state, :company_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_city
+    @city = City.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def city_params
+    params.require(:city).permit(:description, :state, :company_id)
+  end
 end
