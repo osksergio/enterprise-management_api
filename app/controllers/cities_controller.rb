@@ -9,7 +9,8 @@ class CitiesController < ApplicationController
 
   # GET /cities/1
   def show
-    render json: @city
+    service = City::ShowCity.call(params[:id])
+    render json: service if service
   end
 
   # POST /cities
