@@ -2,7 +2,7 @@
 
 # controller Companies: multi-tenant pattern
 class CompaniesController < ApplicationController
-  before_action :set_company, only: [:show, :update]
+  before_action :set_company, only: %i[show update]
 
   # GET /companies
   def index
