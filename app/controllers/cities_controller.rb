@@ -26,10 +26,12 @@ class CitiesController < ApplicationController
 
   # PATCH/PUT /cities/1
   def update
-    if @city.update(city_params)
-      render json: @city
+    service = City::UpdateCity.call(params)
+
+    if service.success?
+      render json: service.city, status: :ok
     else
-      render json: @city.errors, status: :unprocessable_entity
+      render json: { errors: service.errors, test: service.test }, status: :unprocessable_entity
     end
   end
 
