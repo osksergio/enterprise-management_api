@@ -37,3 +37,6 @@ pt:
       blank: 'Não pode ser nulo'
     delete_company:
       not_found: 'Registro não encontrado'
+  city:
+    create_city:
+      record_invalid: 'Registro inválido'

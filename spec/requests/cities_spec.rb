@@ -3,13 +3,13 @@
 require 'rails_helper'
 
 RSpec.describe '/cities', type: :request do
-  let(:valid_attributes) do
+  let(:valid_attributes) {
     {
-      description: 'City description',
-      state: 'ST',
-      company_id: 1
+      description: "City description",
+      state: "ST",
+      company_id: "1"
     }
-  end
+  }
 
   let(:invalid_attributes) do
     {
