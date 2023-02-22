@@ -88,13 +88,37 @@ RSpec.describe '/cities', type: :request do
         )
       end
 
-      # parei aqui!!!
-      #
+      it 'valid city attributes' do
+        patch city_url(city), params:
+          {
+            description: 'New Description City',
+            state: 'New State',
+            company_id: 2
+          }, headers: valid_headers, as: :json
+
+        expect(response.status).to eq(200)
+        expect(city.reload.description).to eq('New Description City')
+        expect(city.reload.state).to eq('New State')
+        expect(city.reload.company_id).to eq(2)
+      end
+
+      it 'invalid city attributes' do
+        patch city_url(city), params: {
+          description: nil,
+          state: '',
+          company_id: -1
+        }, headers: valid_headers, as: :json
+
+        expect(response.status).to eq(422)
+        expect(city.reload.description).to eq('Original Description City')
+        expect(city.reload.state).to eq('Original State')
+        expect(city.reload.company_id).to eq(1)
+      end
     end
   end
 
-  describe "DELETE /destroy" do
-    it "destroys the requested city" do
+  describe 'DELETE /destroy' do
+    it 'destroys the requested city' do
       city = City.create! valid_attributes
       expect do
         delete city_url(city), headers: valid_headers, as: :json
