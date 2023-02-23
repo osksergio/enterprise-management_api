@@ -7,7 +7,7 @@ RSpec.describe '/cities', type: :request do
     {
       description: "City description",
       state: "ST",
-      company_id: "1"
+      company_id: 1
     }
   }
 
