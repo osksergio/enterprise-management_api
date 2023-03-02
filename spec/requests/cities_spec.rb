@@ -2,20 +2,20 @@
 
 require 'rails_helper'
 
-RSpec.describe '/cities', type: :request do
+RSpec.describe "/cities", type: :request do
   let(:valid_attributes) {
     {
       description: "City description",
       state: "ST",
-      company_id: 1
+      company_id: "1"
     }
   }
 
   let(:invalid_attributes) do
     {
-      description: '',
-      state: '',
-      company_id: -1
+      description: "",
+      state: "",
+      company_id: ""
     }
   end
 
