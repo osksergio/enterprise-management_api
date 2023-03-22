@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 
-module City
-  # class: service to update city entity
+# class: service to update cities entity
+module Cities
   class UpdateCity
     include Callable
-
 
     def initialize(params)
       @id = params[:id]
@@ -38,6 +37,5 @@ module City
     def persist
       @city.save
     end
-
   end
 end

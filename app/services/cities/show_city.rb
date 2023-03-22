@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module City
+module Cities
   class ShowCity
     include Callable
 

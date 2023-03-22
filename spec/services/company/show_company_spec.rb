@@ -2,13 +2,13 @@
 
 require 'rails_helper'
 
-RSpec.describe Company::ShowCompany do
-  let(:company) {
+RSpec.describe Companies::ShowCompany do
+  let(:company) do
     Company.create(description: 'Description Company', email: 'test@example.com', password: 'password')
-  }
+  end
 
   it 'return record company' do
-    service = Company::ShowCompany.call(company[:id])
+    service = Companies::ShowCompany.call(company[:id])
     expect(service.present?).to be_truthy
   end
 end

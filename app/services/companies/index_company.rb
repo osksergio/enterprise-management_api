@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
-module City
-  class IndexCity
+# class: get companies
+module Companies
+  class IndexCompany
     include Callable
 
     def call
@@ -11,7 +12,7 @@ module City
     private
 
     def index
-      @cities = City.all
+      @companies = Company.all
     end
   end
 end

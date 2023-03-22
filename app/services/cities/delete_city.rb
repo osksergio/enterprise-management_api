@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
-module City
-  # class to remove >> city exclusion service
+module Cities
   class DeleteCity
     include Callable
 
@@ -18,9 +17,8 @@ module City
     def valid?
       @city = City.find(@city_id)
       true
-
-      rescue
-      add_error(nil, 'city', 'not_found')
+    rescue StandardError
+      add_error(nil, 'cities', 'not_found')
       false
     end
 
