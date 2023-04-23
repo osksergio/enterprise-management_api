@@ -22,7 +22,8 @@ module Cities
     private
 
     def build
-      #
+      @city = City.find(@id)
+      @city.assign_attributes(description: @description, state: @state, company_id: @company_id)
     end
 
     def valid?
