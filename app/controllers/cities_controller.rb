@@ -3,24 +3,24 @@ class CitiesController < ApplicationController
 
   # GET /cities
   def index
-    @cities = City.all
-
-    render json: @cities
+    service = Cities::IndexCity.call
+    render json: service
   end
 
   # GET /cities/1
   def show
-    render json: @city
+    service = Cities::ShowCity.call(params[:id])
+    render json: service if service
   end
 
   # POST /cities
   def create
-    @city = City.new(city_params)
+    service = Cities::CreateCity.call(city_params)
 
-    if @city.save
-      render json: @city, status: :created, location: @city
+    if service.success?
+      render json: @city, status: :created
     else
-      render json: @city.errors, status: :unprocessable_entity
+      render json: { errors: service.errors }, status: :unprocessable_entity
     end
   end
 
@@ -35,7 +35,14 @@ class CitiesController < ApplicationController
 
   # DELETE /cities/1
   def destroy
-    @city.destroy
+    id_deleted = params[:id]
+    service = Cities::DeleteCity.call(id_deleted)
+
+    if service.success?
+      render json: { message: "City was successfully destroyed (id: #{id_deleted}).", status: :ok }
+    else
+      render json: { errors: service.errors }, status: :unprocessable_entity
+    end
   end
 
   private
