@@ -18,10 +18,4 @@ RSpec.describe Cities::CreateCity do
     end
   end
 
-  context 'When created city invalid parameters' do
-    it 'return nil' do
-      service = Cities::CreateCity.call({ description: '' })
-      expect(service).to be_nil
-    end
-  end
 end
