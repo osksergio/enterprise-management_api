@@ -1,7 +1,13 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
+  sequence :descriptions do |n|
+    "City Name ##{n}"
+  end
+
   factory :city do
-    description { "MyString" }
-    state { "MyString" }
-    company { nil }
+    description { generate(:descriptions) }
+    state { 'ST' }
+    company { '1' }
   end
 end
